@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:33:51 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2024/12/12 11:47:31 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2024/12/12 12:13:33 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,18 @@
 #include <string>
 #include <iostream>
 
-class Date{
+class BitcoinExchange{
     private:
         int _day;
         int _month;
         int _year;
+        std::string database;
     
     public:
-        Date();
-        ~Date();
-        Date(Date const &other);
-        Date &operator=(Date const &other);
+        BitcoinExchange();
+        ~BitcoinExchange();
+        BitcoinExchange(BitcoinExchange const &other);
+        BitcoinExchange &operator=(BitcoinExchange const &other);
         bool isValidDate(void) const;
-};
-
-class DateAndPrice{
-    private: 
-        std::string database;
-    public:
-        DateAndPrice();
-        ~DateAndPrice();
-        DateAndPrice(DateAndPrice const &other);
-        DateAndPrice &operator=(DateAndPrice const &other);
+        bool isInRange(void) const;
 };

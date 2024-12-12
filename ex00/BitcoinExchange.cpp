@@ -6,15 +6,29 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:33:30 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2024/12/12 11:44:29 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2024/12/12 12:16:26 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
+BitcoinExchange::BitcoinExchange(){}
 
+BitcoinExchange::~BitcoinExchange(){}
 
-bool Data::isValidDate(void) const
+BitcoinExchange::BitcoinExchange(BitcoinExchange const &other)
+{
+    *this = other;
+}
+
+BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &other)
+{
+    if (this != &other)
+		*this = other;
+	return (*this);    
+}
+
+bool BitcoinExchange::isValidDate(void) const
 {
     int maxDay;
     if (_year < 0 || _month < 1 || _month > 12 || _day < 1)
@@ -30,4 +44,11 @@ bool Data::isValidDate(void) const
         default: maxDay=31; break; 
     }
     return _day<=maxDay;
+}
+
+
+// 仮想通貨の取引が行われていたか
+bool BitcoinExchange::isInRange(void) const
+{
+    
 }
