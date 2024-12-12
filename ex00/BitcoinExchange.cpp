@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:33:30 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2024/12/12 12:16:26 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2024/12/12 14:15:06 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,36 @@ BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &other)
 	return (*this);    
 }
 
-bool BitcoinExchange::isValidDate(void) const
+std::string BitcoinExchange::getDate() const
+{
+    return _date;
+}
+
+void BitcoinExchange::_stringToDate()
+{
+    std::string date;
+    date = _date;
+
+    if (date.size() != 10)
+        throw ;
+    for (int i=0;i<10;i++)
+    {
+        if ((i == 4 || i == 7) && date[i] != '-')
+            throw dateException(*this);
+        else if ((i != 4 && i != 7) && !isdigit(date[i]))
+            throw dateException(*this);
+    }
+    
+    // 2009-01-02
+    _year = std::stoi(date.substr(0,4));
+    _month = std::stoi(date.substr(5,2));
+    _day = std::stoi(date.substr(8,2));
+
+    if (!_isValidDate())
+        throw dateException(*this);
+}
+
+bool BitcoinExchange::_isValidDate(void) const
 {
     int maxDay;
     if (_year < 0 || _month < 1 || _month > 12 || _day < 1)
@@ -48,7 +77,7 @@ bool BitcoinExchange::isValidDate(void) const
 
 
 // 仮想通貨の取引が行われていたか
-bool BitcoinExchange::isInRange(void) const
-{
+// bool BitcoinExchange::isInRange(void) const
+// {
     
-}
+// }
