@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 23:18:51 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2024/12/15 14:58:39 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2025/02/18 16:36:29 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ double RPN::calculate(const std::string &expression)
         {
             if (stack.size() < 2) 
                 throw std::runtime_error("Not enough number");
-                double b = stack.top(); 
-                stack.pop();
-                double a = stack.top(); 
-                stack.pop();
-                stack.push(applyOperation(token,a,b));
+            double b = stack.top(); 
+            stack.pop();
+            double a = stack.top(); 
+            stack.pop();
+            stack.push(applyOperation(token,a,b));
         }
         else
             throw std::runtime_error("Invalid token: " + token);
