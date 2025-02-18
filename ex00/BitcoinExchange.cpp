@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:33:30 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2024/12/13 15:02:46 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2025/02/18 16:31:21 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ bool BitcoinExchange::_isValidDate() const
 // CSVファイルを読み込み、データベースに保存するメソッド
 void BitcoinExchange::loadDatabase(const std::string& filename)
 {
-    std::ifstream file(filename);
+    std::ifstream file(filename.c_str());
     if (!file.is_open())
         throw std::runtime_error("Error: could not open database file.");
     

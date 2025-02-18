@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:33:51 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2024/12/13 14:00:04 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2025/02/18 16:31:48 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <fstream>
 #include <sstream>
 #include <map>
+#include <cstdlib>
 
 class BitcoinExchange{
     private:
