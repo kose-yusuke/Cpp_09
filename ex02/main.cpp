@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:54:50 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2024/12/25 13:18:44 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2025/02/18 16:40:12 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ std::vector<int> convertToVector(int argc, char **argv)
         if (!(iss >> num)) {
             throw std::invalid_argument("Invalid number: " + std::string(argv[i]));
         }
-        vec.push_back(std::stoi(argv[i]));
+        vec.push_back(std::strtol(argv[i], NULL, 10));
     }
     return vec;
 }
