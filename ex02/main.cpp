@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:54:50 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2025/05/14 15:19:12 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2025/05/14 15:47:36 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,6 @@ static void output_after(std::deque<int>& deq)
     std::cout << std::endl;
 }
 
-void mergeInsertionSort(std::vector<int>& vec)
-{
-    vec.push_back(1);
-    vec.push_back(2);
-}
-
 std::vector<int> convertToVector(int argc, char **argv)
 {
     std::vector<int> vec;
@@ -94,26 +88,26 @@ std::deque<int> convertToDeque(int argc, char **argv)
     return deq;
 }
 
-static bool has_duplicates(const std::vector<int>& v) {
-    for (size_t i = 0; i + 1 < v.size(); ++i) {
-        for (size_t j = i + 1; j < v.size(); ++j) {
-            if (v[i] == v[j])
-                return true;
-        }
-    }
-    return false;
-}
+// static bool has_duplicates(const std::vector<int>& v) {
+//     for (size_t i = 0; i + 1 < v.size(); ++i) {
+//         for (size_t j = i + 1; j < v.size(); ++j) {
+//             if (v[i] == v[j])
+//                 return true;
+//         }
+//     }
+//     return false;
+// }
 
 int main(int argc, char **argv)
 {
     PmergeMe pmergeme;
     if (!arg_validate(argc, argv))
         return 1;    
-    std::vector<int> vec_input = convertToVector(argc,argv);
-    if (has_duplicates(vec_input)) {
-            std::cerr << "Error: duplicate numbers detected" << std::endl;
-            return 1;
-    }
+    // std::vector<int> vec_input = convertToVector(argc,argv);
+    // if (has_duplicates(vec_input)) {
+    //         std::cerr << "Error: duplicate numbers detected" << std::endl;
+    //         return 1;
+    // }
     
     //実行1_vector
     clock_t start1 = clock();

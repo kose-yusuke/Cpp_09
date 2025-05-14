@@ -17,4 +17,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+run: 
+	@./$(NAME) $(shell jot -r 3000 1 100000)
+
+.PHONY: all clean fclean re run
