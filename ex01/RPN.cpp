@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 23:18:51 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2025/02/18 16:36:29 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2025/03/06 17:11:09 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ double RPN::applyOperation(const std::string &operation, double a, double b)
     }
     throw std::runtime_error("Unknown operator: " + operation);
 }
+
+// オーバーフローの対策した方が良さそう
+// -1かける場合とかも
 
 double RPN::calculate(const std::string &expression)
 {
