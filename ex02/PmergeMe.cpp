@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 14:05:28 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2025/05/14 15:18:41 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2025/05/17 14:42:30 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,60 @@ PmergeMe& PmergeMe::operator=(PmergeMe const &other)
     if (this != &other)
         *this = other;
     return *this;
+}
+
+static size_t jacobsthal(size_t n) {
+    if (n == 0) 
+        return 0;
+    if (n == 1) 
+        return 1;
+    return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
+}
+
+static std::vector<size_t> get_jacobsthal_order_vector(size_t n) {
+    std::vector<size_t> order;
+    std::vector<bool> used(n, false);
+
+    size_t j = 2;
+    while (true) {
+        size_t jacob = jacobsthal(j);
+        if (jacob == 0 || jacob - 1 >= n) 
+            break;
+        order.push_back(jacob - 1);
+        used[jacob - 1] = true;
+        ++j;
+    }
+
+    for (size_t i = 0; i < n; ++i) {
+        if (!used[i]) {
+            order.push_back(i);
+        }
+    }
+
+    return order;
+}
+
+static std::deque<size_t> get_jacobsthal_order_deque(size_t n) {
+    std::deque<size_t> order;
+    std::deque<bool> used(n, false);
+
+    size_t j = 2;
+    while (true) {
+        size_t jacob = jacobsthal(j);
+        if (jacob == 0 || jacob - 1 >= n)
+            break;
+        order.push_back(jacob - 1);
+        used[jacob - 1] = true;
+        ++j;
+    }
+
+    for (size_t i = 0; i < n; ++i) {
+        if (!used[i]) {
+            order.push_back(i);
+        }
+    }
+
+    return order;
 }
 
 static int binary_search_insert_pos(const std::vector<int>& sorted, int value)
@@ -72,8 +126,9 @@ void PmergeMe::vec_sort(std::vector<int>& vec)
         insert_list.push_back(pairs[j].second);
     }
 
-    for (size_t k = 0; k < insert_list.size(); ++k) {
-        int val = insert_list[k];
+    std::vector<size_t> order = get_jacobsthal_order_vector(insert_list.size());
+    for (size_t i = 0; i < order.size(); ++i) {
+        int val = insert_list[order[i]];
         int pos = binary_search_insert_pos(main_chain, val);
         main_chain.insert(main_chain.begin() + pos, val);
     }
@@ -129,8 +184,9 @@ void PmergeMe::deq_sort(std::deque<int>& deq)
         insert_list.push_back(pairs[j].second);
     }
 
-    for (size_t k = 0; k < insert_list.size(); ++k) {
-        int val = insert_list[k];
+    std::deque<size_t> order = get_jacobsthal_order_deque(insert_list.size());
+    for (size_t i = 0; i < order.size(); ++i) {
+        int val = insert_list[order[i]];
         int pos = binary_search_insert_pos_deq(main_chain, val);
         main_chain.insert(main_chain.begin() + pos, val);
     }
