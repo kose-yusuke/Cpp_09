@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 23:18:51 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2025/03/06 17:11:09 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2025/05/18 14:31:53 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ double stringToDouble(const std::string &str)
     if (ss.fail()) {
         throw std::runtime_error("Invalid number: " + str);
     }
+    if (std::isinf(value) || std::isnan(value)) {
+        throw std::runtime_error("Invalid number (overflow/NaN): " + str);
+    }
     return value;
 }
 
@@ -43,20 +46,29 @@ bool RPN::isOperator(const std::string &token)
 
 double RPN::applyOperation(const std::string &operation, double a, double b)
 {
-    if (operation == "+") return a + b;
-    if (operation == "-") return a - b;
-    if (operation == "*") return a * b;
-    if (operation == "/") {
-        if (b == 0) {
+    double result;
+    
+    if (operation == "+") 
+        result = a + b;
+    else if (operation == "-") 
+        result = a - b;
+    else if (operation == "*") 
+        result = a * b;
+    else if (operation == "/") {
+        if (b == 0)
             throw std::runtime_error("Division by zero.");
-        }
-        return a / b;
-    }
+        result =  a / b;
+    } else {
     throw std::runtime_error("Unknown operator: " + operation);
-}
+    }
 
-// オーバーフローの対策した方が良さそう
-// -1かける場合とかも
+    if (std::isinf(result))
+        throw std::runtime_error("Overflow occurred (result is infinity).");
+    if (std::isnan(result))
+        throw std::runtime_error("Invalid result (NaN).");
+    
+    return result;
+}
 
 double RPN::calculate(const std::string &expression)
 {

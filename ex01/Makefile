@@ -37,6 +37,7 @@ run: $(NAME)
 	./$(NAME) "9 6 9 3 + 1 * / * 7 + 5 +"
 	./$(NAME) "1 2 /"
 	./$(NAME) "1 2 / 2 *"
+	./$(NAME) "1e308 1e308 +" || true
 	@echo ""
 	@echo "== Tests Completed =="
 
