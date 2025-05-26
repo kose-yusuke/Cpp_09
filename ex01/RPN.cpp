@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 23:18:51 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2025/05/18 14:31:53 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2025/05/26 15:59:38 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ double stringToDouble(const std::string &str)
     if (ss.fail()) {
         throw std::runtime_error("Invalid number: " + str);
     }
-    if (std::isinf(value) || std::isnan(value)) {
+    if (isinf(value) || isnan(value)) {
         throw std::runtime_error("Invalid number (overflow/NaN): " + str);
     }
     return value;
@@ -62,9 +62,9 @@ double RPN::applyOperation(const std::string &operation, double a, double b)
     throw std::runtime_error("Unknown operator: " + operation);
     }
 
-    if (std::isinf(result))
+    if (isinf(result))
         throw std::runtime_error("Overflow occurred (result is infinity).");
-    if (std::isnan(result))
+    if (isnan(result))
         throw std::runtime_error("Invalid result (NaN).");
     
     return result;
