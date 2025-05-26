@@ -6,7 +6,7 @@
 /*   By: koseki.yusuke <koseki.yusuke@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:33:30 by koseki.yusu       #+#    #+#             */
-/*   Updated: 2025/05/18 14:20:05 by koseki.yusu      ###   ########.fr       */
+/*   Updated: 2025/05/26 13:54:13 by koseki.yusu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,33 @@ void BitcoinExchange::loadDatabase(const std::string& filename)
 
 bool BitcoinExchange::isValidNumber(const std::string& str)
 {
-    // マッチさせたい形式: 正負の整数または小数（空白や文字は禁止）
-    std::regex pattern("^[-+]?[0-9]+(\\.[0-9]+)?$");
-    return std::regex_match(str, pattern);
+    if (str.empty())
+        return false;
+
+    size_t i = 0;
+
+    if (str[i] == '+' || str[i] == '-')
+        i++;
+
+    bool hasDigit = false;
+    bool hasDot = false;
+
+    for (; i < str.length(); ++i)
+    {
+        if (str[i] >= '0' && str[i] <= '9') {
+            hasDigit = true;
+        }
+        else if (str[i] == '.') {
+            if (hasDot)
+                return false;
+            hasDot = true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    return hasDigit;
 }
 
 void BitcoinExchange::processInput(const std::string& filename)
